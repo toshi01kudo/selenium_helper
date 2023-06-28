@@ -142,6 +142,16 @@ class SeleniumBrowser:
             self.browser.set_window_position(0, 0)
             self.browser.set_window_size(900, 500)
 
+        # delete parameters
+        del self.gekodriver_path
+        del self.headless
+        del self.tor_access
+        del self.tor_browser
+        del self.tor_setting
+        del self.addons
+        del self.proxy
+        del self.set_size
+
     # Class Public Fuctions -------
 
     def close_other_tabs(self) -> None:
