@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@v0.0.0
+        with:
+          geckodriver-version: "0.33.0"
       - name: Setup Firefox
         uses: browser-actions/setup-firefox@v1.1.0
       - run: firefox --version
