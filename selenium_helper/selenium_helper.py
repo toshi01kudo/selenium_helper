@@ -28,7 +28,7 @@ class SeleniumBrowser:
 
     def __init__(
         self,
-        gekodriver_path: str,
+        geckodriver_path: str,
         headless: bool = True,
         tor_access: bool = False,
         tor_browser: bool = False,
@@ -40,8 +40,8 @@ class SeleniumBrowser:
         """
         class function for selenium browser
         Args:
+            geckodriver_path: geckodriver's path
             headless: Use headless mode (bool), default = True
-            gekodriver_path: geko_driver's path
             tor_access: Use Tor (bool), default = False
             tor_browser: Use Tor browser (bool), default = False
             tor_setting: Tor browser setting (dict), default = {"tor_browser": "", "tor_profile": ""}
@@ -52,7 +52,7 @@ class SeleniumBrowser:
             browser: self.browser
         """
         # input parameters
-        self.gekodriver_path = gekodriver_path
+        self.geckodriver_path = geckodriver_path
         self.headless = headless
         self.tor_access = tor_access
         self.tor_browser = tor_browser
@@ -70,7 +70,7 @@ class SeleniumBrowser:
             options.add_argument("--headless")
         # Selenium4からServiceオブジェクトにexecutable_pathを渡し、そのServiceオブジェクトを渡す必要があります。
         # https://qiita.com/yagaodekawasu/items/5813a8cb4c3d73386e7a
-        firefox_servie = fs.Service(executable_path=gekodriver_path)
+        firefox_servie = fs.Service(executable_path=geckodriver_path)
 
         if tor_access and tor_browser:
             # 現在はTorの自動接続が上手く動作していない
@@ -143,7 +143,7 @@ class SeleniumBrowser:
             self.browser.set_window_size(900, 500)
 
         # delete parameters
-        del self.gekodriver_path
+        del self.geckodriver_path
         del self.headless
         del self.tor_access
         del self.tor_browser
@@ -250,8 +250,8 @@ class SeleniumBrowser:
         Returns:
             init_check_result: True or False
         """
-        if len(self.gekodriver_path) == 0:
-            # gekodriver_path の指定は必須
+        if len(self.geckodriver_path) == 0:
+            # geckodriver_path の指定は必須
             init_ok = False
         elif (
             self.tor_browser
