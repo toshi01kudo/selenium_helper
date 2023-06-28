@@ -1,0 +1,19 @@
+name: selenium_web_test
+on: push
+jobs:
+  web_test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Setup Geckodriver
+        uses: browser-actions/setup-geckodriver@v0.0.0
+      - name: Setup Firefox
+        uses: browser-actions/setup-firefox@v1.1.0
+      - run: firefox --version
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - name: get python version
+        run: python -V
+      - name: run test
+        run: cd test && python -m unittest -v
