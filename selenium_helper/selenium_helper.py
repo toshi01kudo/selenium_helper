@@ -249,10 +249,10 @@ class SeleniumBrowser:
         ):
             # tor_browser 使用時には tor_setting が必須
             init_ok = False
-        elif len(self.proxy["ip"]) == 0 ^ len(self.proxy["port"]) == 0:
+        elif (len(self.proxy["ip"]) == 0) ^ (len(self.proxy["port"]) == 0):
             # proxy を使用するなら、ipとport指定が必要
             init_ok = False
-        elif len(self.addons["dir"]) == 0 ^ len(self.addons["apps"]) == 0:
+        elif (len(self.addons["dir"]) == 0) ^ (len(self.addons["apps"]) == 0):
             # addons を使用するなら ["apps"],["dir"] 必須
             init_ok = False
         else:
