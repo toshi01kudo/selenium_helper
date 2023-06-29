@@ -18,7 +18,7 @@ Or, you can get this repogitory with `git clone`, like the usual git operation.
 You need to specify several parameters.
 ```
 import selenium_helper
-geckodriver_path = r'input geckodriver path here.'
+geckodriver_path = r'input geckodriver's path here.'
 brsr = selenium_helper.SeleniumBrowser(geckodriver_path)
 ```
 * geckodriver_path: You need to specify geckodriver path. (You need to install geckodriver before use this module.)
@@ -39,6 +39,7 @@ brsr = selenium_helper.SeleniumBrowser(geckodriver_path)
 
 
 ## References
-* [Pythonで自分だけのクソライブラリを作る方法](https://zenn.dev/karaage0703/articles/db8c663640c68b)
-* [GitHubリポジトリのブランチを指定して pip install する](https://qiita.com/tshimura/items/8ee857b7caf253736a81)
-
+* [Pythonで自分だけのクソライブラリを作る方法](https://zenn.dev/karaage0703/articles/db8c663640c68b) (Japanese)
+* [GitHubリポジトリのブランチを指定して pip install する](https://qiita.com/tshimura/items/8ee857b7caf253736a81) (Japanese)
+* [Use Service for executable_path from Selenium4](https://qiita.com/yagaodekawasu/items/5813a8cb4c3d73386e7a) (Japanese)
+* [Scroll down recursively until bottom of the page](https://yuyuublog.com/seleniumscroll/) (Japanese)

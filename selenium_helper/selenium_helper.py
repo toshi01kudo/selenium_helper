@@ -23,7 +23,7 @@ from selenium.common.exceptions import TimeoutException
 
 class SeleniumBrowser:
     """
-    Selenium を便利に使うクラス
+    This is a module to support to use a selenium with several functions.
     """
 
     def __init__(
@@ -64,17 +64,20 @@ class SeleniumBrowser:
         init_ok = self._init_check()
         if not init_ok:
             raise NotCorrectValueException
-        # Firefoxのヘッドレスモードを有効にするための Option
+        # Activate headless mode of Firefox
         options = webdriver.FirefoxOptions()
         if headless:
             options.add_argument("--headless")
-        # Selenium4からServiceオブジェクトにexecutable_pathを渡し、そのServiceオブジェクトを渡す必要があります。
-        # https://qiita.com/yagaodekawasu/items/5813a8cb4c3d73386e7a
-        firefox_servie = fs.Service(executable_path=geckodriver_path)
+        # Use Service for executable_path from Selenium4
+        firefox_service = fs.Service(executable_path=geckodriver_path)
 
         if tor_access and tor_browser:
-            # 現在はTorの自動接続が上手く動作していない
-            # Torで起動する場合
+            """
+            Use tor network with tor browser.
+
+            [Caution] As of now, my browser doesn't connect to tor network automatically.
+            You need to connect to the tor network manually.
+            """
             proxyHost = "127.0.0.1"
             proxyPort = 9150
 
@@ -87,13 +90,16 @@ class SeleniumBrowser:
             fp.set_preference("network.proxy.socks_remote_dns", False)
             fp.update_preferences()
 
-            # selenium用ブラウザ
+            # get browser for selenium
             self.browser = webdriver.Firefox(firefox_binary=binary, firefox_profile=fp, options=options)
 
         elif tor_access:
-            # Tor 経由でサイトへアクセス
-            # Tor へ Proxy アクセス
-            """事前に Tor Browser で Tor にアクセスしていないと利用不可のため注意"""
+            """
+            Use tor network with Firefox.
+
+            [Caution] You need to connect to the tor network manually,
+            such as, tor browser, and it provides proxy access with localhost and port 9150.
+            """
             proxyHost = "127.0.0.1"
             proxyPort = 9150
             fp = webdriver.FirefoxProfile()
@@ -102,10 +108,11 @@ class SeleniumBrowser:
             fp.set_preference("network.proxy.socks_port", proxyPort)
             fp.update_preferences()
 
-            # selenium用ブラウザ
-            self.browser = webdriver.Firefox(service=firefox_servie, firefox_profile=fp, options=options)
+            # get browser for selenium
+            self.browser = webdriver.Firefox(service=firefox_service, firefox_profile=fp, options=options)
 
         elif len(proxy["ip"]) > 0 and len(proxy["port"]) > 0:
+            # proxy access with specified ip and port.
             proxyHost = proxy["ip"]
             proxyPort = proxy["port"]
             fp = webdriver.FirefoxProfile()
@@ -116,29 +123,29 @@ class SeleniumBrowser:
             fp.set_preference("network.proxy.ssl_port", proxyPort)
             fp.update_preferences()
 
-            # selenium用ブラウザ
-            self.browser = webdriver.Firefox(service=firefox_servie, firefox_profile=fp, options=options)
+            # get browser for selenium
+            self.browser = webdriver.Firefox(service=firefox_service, firefox_profile=fp, options=options)
 
         else:
-            # 通常の Selenium 起動
-            # selenium用ブラウザ
-            self.browser = webdriver.Firefox(service=firefox_servie, options=options)
+            # Normal access with selenium.
+            # get browser for selenium
+            self.browser = webdriver.Firefox(service=firefox_service, options=options)
 
         if len(addons["dir"]) > 0 and len(addons["apps"]) > 0:
-            # 拡張機能
+            # Use addons
             extensions_dir = addons["dir"]
             extensions = addons["apps"]
             for extension in extensions:
                 self.browser.install_addon(extensions_dir + extension, temporary=True)
 
-        self.browser.implicitly_wait(10)  # 暗黙のタイムアウト時間 (秒)
+        self.browser.implicitly_wait(10)  # set implicit time until a timeout (sec)
 
-        # 他のタブが開いていたらクローズ
+        # Close other tabs.
         time.sleep(1)
         self.close_other_tabs()
 
         if set_size:
-            # ブラウザ位置・サイズ調整
+            # set position and size.
             self.browser.set_window_position(0, 0)
             self.browser.set_window_size(900, 500)
 
@@ -206,21 +213,20 @@ class SeleniumBrowser:
     def recur_scroll_down(self, speed: int, start_height: int = 1) -> None:
         """
         Scroll down recursively until bottom of the page.
-        original: https://yuyuublog.com/seleniumscroll/
         Args:
             speed: it should be tuned, based on the bandwidth of the internet.
             start_height: start height value. it's 1 at the beginning.
         Returns:
             None
         """
-        # ページの高さを取得
+        # get page height
         height = self.browser.execute_script("return document.body.scrollHeight")
 
-        # ループ処理で少しづつ移動
+        # scroll down slowly with loop
         for i in range(start_height, height, speed):
             self.browser.execute_script("window.scrollTo(0, " + str(i) + ");")
 
-        # ページが動的に更新され、高さ情報が増加する場合、再帰的にスクロール
+        # In case the rest of the page is dynamically loaded, execute this function recursively.
         new_height = self.browser.execute_script("return document.body.scrollHeight")
         if new_height - height > 0:
             self.recur_scroll_down(speed, height)
@@ -251,19 +257,19 @@ class SeleniumBrowser:
             init_check_result: True or False
         """
         if len(self.geckodriver_path) == 0:
-            # geckodriver_path の指定は必須
+            # geckodriver_path is mandatory.
             init_ok = False
         elif (
             self.tor_browser
             and (len(self.tor_setting["tor_browser"]) == 0 or len(self.tor_setting["tor_profile"])) == 0
         ):
-            # tor_browser 使用時には tor_setting が必須
+            # tor_setting is required for tor_browser.
             init_ok = False
         elif (len(self.proxy["ip"]) == 0) ^ (len(self.proxy["port"]) == 0):
-            # proxy を使用するなら、ipとport指定が必要
+            # proxy needs ip and port.
             init_ok = False
         elif (len(self.addons["dir"]) == 0) ^ (len(self.addons["apps"]) == 0):
-            # addons を使用するなら ["apps"],["dir"] 必須
+            # addons needs ["apps"] and ["dir"].
             init_ok = False
         else:
             init_ok = True
