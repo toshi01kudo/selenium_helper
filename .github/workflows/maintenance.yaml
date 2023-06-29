@@ -1,0 +1,38 @@
+name: lint-format-docs_update
+on: push
+jobs:
+  lint-format-docs_update:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Get Python version
+      run: python -V
+    - name: Update docs
+      run: |
+        cd selenium-helper
+        pip install pydoc
+        pydoc selenium-helper
+        mv selenium-helper.html ../docs/index.html
+    - name: Format by black
+      run: |
+        pip install black
+        black selenium-helper
+    - name: Commit files
+      continue-on-error: true
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add .
+        git status
+        git commit -m 'apispec update & format by black'
+        git push
+    - name: Run flake8 test
+      run: |
+        pip install flake8
+        cd selenium-helper
+        flake8 --max-line-length 150

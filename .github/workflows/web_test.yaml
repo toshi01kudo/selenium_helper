@@ -1,5 +1,8 @@
 name: selenium_web_test
-on: push
+on:
+  push:
+    paths:
+      - "selenium-helper/**"
 jobs:
   web_test:
     runs-on: ubuntu-22.04
