@@ -4,18 +4,10 @@ jobs:
   lint-format-docs_update:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-        architecture: 'x64'
-    - name: Get Python version
-      run: python -V
     - name: Update docs
       run: |
-        cd selenium-helper
         pip install pydoc
+        cd selenium-helper
         pydoc selenium-helper
         mv selenium-helper.html ../docs/index.html
     - name: Format by black
@@ -29,7 +21,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git add .
         git status
-        git commit -m 'apispec update & format by black'
+        git commit -m 'docs update & format by black'
         git push
     - name: Run flake8 test
       run: |
