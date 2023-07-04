@@ -1,175 +1,812 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module selenium_helper</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head><body bgcolor="#f0f0f8">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>selenium_helper API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>selenium_helper</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># imports ------------------
+import time
+import logging
+import gc
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox import service as fs
+from selenium.common.exceptions import TimeoutException
 
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>selenium_helper</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:d%3A%5Cdocuments%5C21_study%5Cprogram%5Cpython%5Cselenium_helper%5Cselenium_helper%5Cselenium_helper.py">d:\documents\21_study\program\python\selenium_helper\selenium_helper\selenium_helper.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;imports&nbsp;------------------</tt></p>
-<p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#aa55cc">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="selenium.webdriver.support.expected_conditions.html">selenium.webdriver.support.expected_conditions</a><br>
-<a href="selenium.webdriver.firefox.service.html">selenium.webdriver.firefox.service</a><br>
-</td><td width="25%" valign=top><a href="gc.html">gc</a><br>
-<a href="json.html">json</a><br>
-</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
-<a href="requests.html">requests</a><br>
-</td><td width="25%" valign=top><a href="time.html">time</a><br>
-<a href="selenium.webdriver.html">selenium.webdriver</a><br>
-</td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ee77aa">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="builtins.html#Exception">builtins.Exception</a>(<a href="builtins.html#BaseException">builtins.BaseException</a>)
-</font></dt><dd>
+# Functions ------------------
+
+# Private Functions ------------------
+
+# Class ------------------
+
+
+class SeleniumBrowser:
+    &#34;&#34;&#34;
+    This is a module to support to use a selenium with several functions.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        geckodriver_path: str,
+        headless: bool = True,
+        tor_access: bool = False,
+        tor_browser: bool = False,
+        browser_setting: dict = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;},
+        addons: dict = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []},
+        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;},
+        set_size: bool = False,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Class function for selenium browser
+        Args:
+            geckodriver_path: geckodriver&#39;s path
+            browser_path: browser&#39;s path, such as, Firefox or Tor
+            headless: Use headless mode (bool), default = True
+            tor_access: Use Tor (bool), default = False
+            tor_browser: Use Tor browser (bool), default = False
+            browser_setting: Browser setting (dict), default = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;}
+            addons: Use installed addons (dict), default = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []}
+            proxy: Use proxy server (dict), default = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;}
+            set_size: set windows size as (900, 500) (bool), default = false
+        Returns:
+            browser: self.browser
+        &#34;&#34;&#34;
+        # input parameters
+        self.geckodriver_path = geckodriver_path
+        self.headless = headless
+        self.tor_access = tor_access
+        self.tor_browser = tor_browser
+        self.browser_setting = browser_setting
+        self.addons = addons
+        self.proxy = proxy
+        self.set_size = set_size
+        # initial check
+        init_ok = self._init_check()
+        if not init_ok:
+            raise NotCorrectValueException
+        # Activate headless mode of Firefox
+        options = webdriver.FirefoxOptions()
+        if headless:
+            options.add_argument(&#34;--headless&#34;)
+        # Profile should be set with options from Selenium4
+        options.set_preference(&#34;profile&#34;, browser_setting[&#34;browser_profile&#34;])
+        # Use Service for executable_path from Selenium4
+        firefox_service = fs.Service(executable_path=geckodriver_path)
+
+        if tor_access and tor_browser:
+            &#34;&#34;&#34;
+            Use tor network with tor browser.
+
+            [Caution] As of now, my browser doesn&#39;t connect to tor network automatically.
+            You need to connect to the tor network manually.
+            &#34;&#34;&#34;
+            proxyHost = &#34;127.0.0.1&#34;
+            proxyPort = 9150
+
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
+            options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
+            options.set_preference(&#34;network.proxy.socks_remote_dns&#34;, False)
+
+        elif tor_access:
+            &#34;&#34;&#34;
+            Use tor network with Firefox.
+
+            [Caution] You need to connect to the tor network manually,
+            such as, tor browser, and it provides proxy access with localhost and port 9150.
+            &#34;&#34;&#34;
+            proxyHost = &#34;127.0.0.1&#34;
+            proxyPort = 9150
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
+            options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
+
+        elif len(proxy[&#34;ip&#34;]) &gt; 0 and len(str(proxy[&#34;port&#34;])) &gt; 0:
+            # Proxy access with specified ip and port.
+            proxyHost = proxy[&#34;ip&#34;]
+            proxyPort = proxy[&#34;port&#34;]
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.http&#34;, proxyHost)
+            options.set_preference(&#34;network.proxy.http_port&#34;, proxyPort)
+            options.set_preference(&#34;network.proxy.ssl&#34;, proxyHost)  # SSL PROXY
+            options.set_preference(&#34;network.proxy.ssl_port&#34;, proxyPort)
+
+        else:
+            # Normal access with selenium.
+            # get browser for selenium
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+
+        self.browser = webdriver.Firefox(service=firefox_service, options=options)
+
+        if len(addons[&#34;dir&#34;]) &gt; 0 and len(addons[&#34;apps&#34;]) &gt; 0:
+            # Use addons
+            extensions_dir = addons[&#34;dir&#34;]
+            extensions = addons[&#34;apps&#34;]
+            for extension in extensions:
+                self.browser.install_addon(extensions_dir + extension, temporary=True)
+
+        self.browser.implicitly_wait(10)  # set implicit time until a timeout (sec)
+
+        # Close other tabs.
+        time.sleep(1)
+        self.close_other_tabs()
+
+        if set_size:
+            # set position and size.
+            self.browser.set_window_position(0, 0)
+            self.browser.set_window_size(900, 500)
+
+        # delete parameters
+        del self.geckodriver_path
+        del self.headless
+        del self.tor_access
+        del self.tor_browser
+        del self.browser_setting
+        del self.addons
+        del self.proxy
+        del self.set_size
+
+    # Class Public Fuctions -------
+
+    def close_other_tabs(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close other tabs
+        Args:
+            None
+        Returns:
+            None
+        &#34;&#34;&#34;
+        if len(self.browser.window_handles) &gt; 1:
+            for tabs in reversed(self.browser.window_handles):
+                if tabs == self.browser.window_handles[0]:
+                    self.browser.switch_to.window(tabs)
+                else:
+                    self.browser.switch_to.window(tabs)
+                    self.browser.close()
+
+    def check_gip(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get current global IP
+        Args:
+            None
+        Returns:
+            gip: global IP (str)
+        &#34;&#34;&#34;
+        try:
+            self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+            )
+        except Exception:
+            logging.info(&#34;Timeout to check IP&#34;)
+            return &#34;&#34;
+
+        gip = self.browser.find_element(By.TAG_NAME, &#34;pre&#34;).text
+        logging.info(f&#34;Global ip: {gip}&#34;)
+        return gip
+
+    def recur_selenium_get(self, url: str) -&gt; None:
+        &#34;&#34;&#34;
+        Access web page recursively.
+        Args:
+            url: web page url (str)
+        Returns:
+            None
+        &#34;&#34;&#34;
+        try:
+            self.browser.get(url)
+        except TimeoutException as e:
+            logging.error(f&#34;Timeout Error to access {url}. Retry &#34;, e)
+            self.recur_selenium_get(url)
+
+    def recur_scroll_down(self, speed: int, start_height: int = 1) -&gt; None:
+        &#34;&#34;&#34;
+        Scroll down recursively until bottom of the page.
+        Args:
+            speed: it should be tuned, based on the bandwidth of the internet.
+            start_height: start height value. it&#39;s 1 at the beginning.
+        Returns:
+            None
+        &#34;&#34;&#34;
+        # get page height
+        height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+
+        # scroll down slowly with loop
+        for i in range(start_height, height, speed):
+            self.browser.execute_script(&#34;window.scrollTo(0, &#34; + str(i) + &#34;);&#34;)
+
+        # In case the rest of the page is dynamically loaded, execute this function recursively.
+        new_height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+        if new_height - height &gt; 0:
+            self.recur_scroll_down(speed, height)
+        else:
+            return
+
+    def close_selenium(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close browser.
+        Args:
+            None
+        Returns:
+            None
+        &#34;&#34;&#34;
+        self.browser.quit()
+        time.sleep(1)
+        del self.browser
+        gc.collect()
+
+    # Class Private Fuctions -------
+
+    def _init_check(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Check parameters at the initialization.
+        Args:
+            None
+        Returns:
+            init_check_result: True or False
+        &#34;&#34;&#34;
+        if (
+            len(self.geckodriver_path) == 0
+            or len(self.browser_setting[&#34;browser_path&#34;]) == 0
+            or len(self.browser_setting[&#34;browser_profile&#34;]) == 0
+        ):
+            # geckodriver_path and browser setting are mandatory.
+            init_ok = False
+        elif (len(self.proxy[&#34;ip&#34;]) == 0) ^ (len(str(self.proxy[&#34;port&#34;])) == 0):
+            # proxy needs ip and port.
+            init_ok = False
+        elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
+            # addons needs [&#34;apps&#34;] and [&#34;dir&#34;].
+            init_ok = False
+        else:
+            init_ok = True
+        return init_ok
+
+
+class NotCorrectValueException(Exception):
+    pass</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><font face="helvetica, arial"><a href="selenium_helper.html#NotCorrectValueException">NotCorrectValueException</a>
-</font></dt></dl>
+<dt id="selenium_helper.NotCorrectValueException"><code class="flex name class">
+<span>class <span class="ident">NotCorrectValueException</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class NotCorrectValueException(Exception):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
 </dd>
-<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
-</font></dt><dd>
+<dt id="selenium_helper.SeleniumBrowser"><code class="flex name class">
+<span>class <span class="ident">SeleniumBrowser</span></span>
+<span>(</span><span>geckodriver_path: str, headless: bool = True, tor_access: bool = False, tor_browser: bool = False, browser_setting: dict = {'browser_path': '', 'browser_profile': ''}, addons: dict = {'dir': '', 'apps': []}, proxy: dict = {'ip': '', 'port': ''}, set_size: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is a module to support to use a selenium with several functions.</p>
+<p>Class function for selenium browser</p>
+<h2 id="args">Args</h2>
 <dl>
-<dt><font face="helvetica, arial"><a href="selenium_helper.html#SeleniumBrowser">SeleniumBrowser</a>
-</font></dt></dl>
+<dt><strong><code>geckodriver_path</code></strong></dt>
+<dd>geckodriver's path</dd>
+<dt><strong><code>browser_path</code></strong></dt>
+<dd>browser's path, such as, Firefox or Tor</dd>
+<dt><strong><code>headless</code></strong></dt>
+<dd>Use headless mode (bool), default = True</dd>
+<dt><strong><code>tor_access</code></strong></dt>
+<dd>Use Tor (bool), default = False</dd>
+<dt><strong><code>tor_browser</code></strong></dt>
+<dd>Use Tor browser (bool), default = False</dd>
+<dt><strong><code>browser_setting</code></strong></dt>
+<dd>Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}</dd>
+<dt><strong><code>addons</code></strong></dt>
+<dd>Use installed addons (dict), default = {"dir": "", "apps": []}</dd>
+<dt><strong><code>proxy</code></strong></dt>
+<dd>Use proxy server (dict), default = {"ip": "", "port": ""}</dd>
+<dt><strong><code>set_size</code></strong></dt>
+<dd>set windows size as (900, 500) (bool), default = false</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>browser</code></dt>
+<dd>self.browser</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SeleniumBrowser:
+    &#34;&#34;&#34;
+    This is a module to support to use a selenium with several functions.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        geckodriver_path: str,
+        headless: bool = True,
+        tor_access: bool = False,
+        tor_browser: bool = False,
+        browser_setting: dict = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;},
+        addons: dict = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []},
+        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;},
+        set_size: bool = False,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Class function for selenium browser
+        Args:
+            geckodriver_path: geckodriver&#39;s path
+            browser_path: browser&#39;s path, such as, Firefox or Tor
+            headless: Use headless mode (bool), default = True
+            tor_access: Use Tor (bool), default = False
+            tor_browser: Use Tor browser (bool), default = False
+            browser_setting: Browser setting (dict), default = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;}
+            addons: Use installed addons (dict), default = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []}
+            proxy: Use proxy server (dict), default = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;}
+            set_size: set windows size as (900, 500) (bool), default = false
+        Returns:
+            browser: self.browser
+        &#34;&#34;&#34;
+        # input parameters
+        self.geckodriver_path = geckodriver_path
+        self.headless = headless
+        self.tor_access = tor_access
+        self.tor_browser = tor_browser
+        self.browser_setting = browser_setting
+        self.addons = addons
+        self.proxy = proxy
+        self.set_size = set_size
+        # initial check
+        init_ok = self._init_check()
+        if not init_ok:
+            raise NotCorrectValueException
+        # Activate headless mode of Firefox
+        options = webdriver.FirefoxOptions()
+        if headless:
+            options.add_argument(&#34;--headless&#34;)
+        # Profile should be set with options from Selenium4
+        options.set_preference(&#34;profile&#34;, browser_setting[&#34;browser_profile&#34;])
+        # Use Service for executable_path from Selenium4
+        firefox_service = fs.Service(executable_path=geckodriver_path)
+
+        if tor_access and tor_browser:
+            &#34;&#34;&#34;
+            Use tor network with tor browser.
+
+            [Caution] As of now, my browser doesn&#39;t connect to tor network automatically.
+            You need to connect to the tor network manually.
+            &#34;&#34;&#34;
+            proxyHost = &#34;127.0.0.1&#34;
+            proxyPort = 9150
+
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
+            options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
+            options.set_preference(&#34;network.proxy.socks_remote_dns&#34;, False)
+
+        elif tor_access:
+            &#34;&#34;&#34;
+            Use tor network with Firefox.
+
+            [Caution] You need to connect to the tor network manually,
+            such as, tor browser, and it provides proxy access with localhost and port 9150.
+            &#34;&#34;&#34;
+            proxyHost = &#34;127.0.0.1&#34;
+            proxyPort = 9150
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
+            options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
+
+        elif len(proxy[&#34;ip&#34;]) &gt; 0 and len(str(proxy[&#34;port&#34;])) &gt; 0:
+            # Proxy access with specified ip and port.
+            proxyHost = proxy[&#34;ip&#34;]
+            proxyPort = proxy[&#34;port&#34;]
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+            options.set_preference(&#34;network.proxy.type&#34;, 1)
+            options.set_preference(&#34;network.proxy.http&#34;, proxyHost)
+            options.set_preference(&#34;network.proxy.http_port&#34;, proxyPort)
+            options.set_preference(&#34;network.proxy.ssl&#34;, proxyHost)  # SSL PROXY
+            options.set_preference(&#34;network.proxy.ssl_port&#34;, proxyPort)
+
+        else:
+            # Normal access with selenium.
+            # get browser for selenium
+            options.binary_location = browser_setting[&#34;browser_path&#34;]
+
+        self.browser = webdriver.Firefox(service=firefox_service, options=options)
+
+        if len(addons[&#34;dir&#34;]) &gt; 0 and len(addons[&#34;apps&#34;]) &gt; 0:
+            # Use addons
+            extensions_dir = addons[&#34;dir&#34;]
+            extensions = addons[&#34;apps&#34;]
+            for extension in extensions:
+                self.browser.install_addon(extensions_dir + extension, temporary=True)
+
+        self.browser.implicitly_wait(10)  # set implicit time until a timeout (sec)
+
+        # Close other tabs.
+        time.sleep(1)
+        self.close_other_tabs()
+
+        if set_size:
+            # set position and size.
+            self.browser.set_window_position(0, 0)
+            self.browser.set_window_size(900, 500)
+
+        # delete parameters
+        del self.geckodriver_path
+        del self.headless
+        del self.tor_access
+        del self.tor_browser
+        del self.browser_setting
+        del self.addons
+        del self.proxy
+        del self.set_size
+
+    # Class Public Fuctions -------
+
+    def close_other_tabs(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close other tabs
+        Args:
+            None
+        Returns:
+            None
+        &#34;&#34;&#34;
+        if len(self.browser.window_handles) &gt; 1:
+            for tabs in reversed(self.browser.window_handles):
+                if tabs == self.browser.window_handles[0]:
+                    self.browser.switch_to.window(tabs)
+                else:
+                    self.browser.switch_to.window(tabs)
+                    self.browser.close()
+
+    def check_gip(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get current global IP
+        Args:
+            None
+        Returns:
+            gip: global IP (str)
+        &#34;&#34;&#34;
+        try:
+            self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+            )
+        except Exception:
+            logging.info(&#34;Timeout to check IP&#34;)
+            return &#34;&#34;
+
+        gip = self.browser.find_element(By.TAG_NAME, &#34;pre&#34;).text
+        logging.info(f&#34;Global ip: {gip}&#34;)
+        return gip
+
+    def recur_selenium_get(self, url: str) -&gt; None:
+        &#34;&#34;&#34;
+        Access web page recursively.
+        Args:
+            url: web page url (str)
+        Returns:
+            None
+        &#34;&#34;&#34;
+        try:
+            self.browser.get(url)
+        except TimeoutException as e:
+            logging.error(f&#34;Timeout Error to access {url}. Retry &#34;, e)
+            self.recur_selenium_get(url)
+
+    def recur_scroll_down(self, speed: int, start_height: int = 1) -&gt; None:
+        &#34;&#34;&#34;
+        Scroll down recursively until bottom of the page.
+        Args:
+            speed: it should be tuned, based on the bandwidth of the internet.
+            start_height: start height value. it&#39;s 1 at the beginning.
+        Returns:
+            None
+        &#34;&#34;&#34;
+        # get page height
+        height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+
+        # scroll down slowly with loop
+        for i in range(start_height, height, speed):
+            self.browser.execute_script(&#34;window.scrollTo(0, &#34; + str(i) + &#34;);&#34;)
+
+        # In case the rest of the page is dynamically loaded, execute this function recursively.
+        new_height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+        if new_height - height &gt; 0:
+            self.recur_scroll_down(speed, height)
+        else:
+            return
+
+    def close_selenium(self) -&gt; None:
+        &#34;&#34;&#34;
+        Close browser.
+        Args:
+            None
+        Returns:
+            None
+        &#34;&#34;&#34;
+        self.browser.quit()
+        time.sleep(1)
+        del self.browser
+        gc.collect()
+
+    # Class Private Fuctions -------
+
+    def _init_check(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Check parameters at the initialization.
+        Args:
+            None
+        Returns:
+            init_check_result: True or False
+        &#34;&#34;&#34;
+        if (
+            len(self.geckodriver_path) == 0
+            or len(self.browser_setting[&#34;browser_path&#34;]) == 0
+            or len(self.browser_setting[&#34;browser_profile&#34;]) == 0
+        ):
+            # geckodriver_path and browser setting are mandatory.
+            init_ok = False
+        elif (len(self.proxy[&#34;ip&#34;]) == 0) ^ (len(str(self.proxy[&#34;port&#34;])) == 0):
+            # proxy needs ip and port.
+            init_ok = False
+        elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
+            # addons needs [&#34;apps&#34;] and [&#34;dir&#34;].
+            init_ok = False
+        else:
+            init_ok = True
+        return init_ok</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="selenium_helper.SeleniumBrowser.check_gip"><code class="name flex">
+<span>def <span class="ident">check_gip</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get current global IP</p>
+<h2 id="args">Args</h2>
+<p>None</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>gip</code></dt>
+<dd>global IP (str)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_gip(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get current global IP
+    Args:
+        None
+    Returns:
+        gip: global IP (str)
+    &#34;&#34;&#34;
+    try:
+        self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+        )
+    except Exception:
+        logging.info(&#34;Timeout to check IP&#34;)
+        return &#34;&#34;
+
+    gip = self.browser.find_element(By.TAG_NAME, &#34;pre&#34;).text
+    logging.info(f&#34;Global ip: {gip}&#34;)
+    return gip</code></pre>
+</details>
+</dd>
+<dt id="selenium_helper.SeleniumBrowser.close_other_tabs"><code class="name flex">
+<span>def <span class="ident">close_other_tabs</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Close other tabs</p>
+<h2 id="args">Args</h2>
+<p>None</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close_other_tabs(self) -&gt; None:
+    &#34;&#34;&#34;
+    Close other tabs
+    Args:
+        None
+    Returns:
+        None
+    &#34;&#34;&#34;
+    if len(self.browser.window_handles) &gt; 1:
+        for tabs in reversed(self.browser.window_handles):
+            if tabs == self.browser.window_handles[0]:
+                self.browser.switch_to.window(tabs)
+            else:
+                self.browser.switch_to.window(tabs)
+                self.browser.close()</code></pre>
+</details>
+</dd>
+<dt id="selenium_helper.SeleniumBrowser.close_selenium"><code class="name flex">
+<span>def <span class="ident">close_selenium</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Close browser.</p>
+<h2 id="args">Args</h2>
+<p>None</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def close_selenium(self) -&gt; None:
+    &#34;&#34;&#34;
+    Close browser.
+    Args:
+        None
+    Returns:
+        None
+    &#34;&#34;&#34;
+    self.browser.quit()
+    time.sleep(1)
+    del self.browser
+    gc.collect()</code></pre>
+</details>
+</dd>
+<dt id="selenium_helper.SeleniumBrowser.recur_scroll_down"><code class="name flex">
+<span>def <span class="ident">recur_scroll_down</span></span>(<span>self, speed: int, start_height: int = 1) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Scroll down recursively until bottom of the page.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>speed</code></strong></dt>
+<dd>it should be tuned, based on the bandwidth of the internet.</dd>
+<dt><strong><code>start_height</code></strong></dt>
+<dd>start height value. it's 1 at the beginning.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def recur_scroll_down(self, speed: int, start_height: int = 1) -&gt; None:
+    &#34;&#34;&#34;
+    Scroll down recursively until bottom of the page.
+    Args:
+        speed: it should be tuned, based on the bandwidth of the internet.
+        start_height: start height value. it&#39;s 1 at the beginning.
+    Returns:
+        None
+    &#34;&#34;&#34;
+    # get page height
+    height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+
+    # scroll down slowly with loop
+    for i in range(start_height, height, speed):
+        self.browser.execute_script(&#34;window.scrollTo(0, &#34; + str(i) + &#34;);&#34;)
+
+    # In case the rest of the page is dynamically loaded, execute this function recursively.
+    new_height = self.browser.execute_script(&#34;return document.body.scrollHeight&#34;)
+    if new_height - height &gt; 0:
+        self.recur_scroll_down(speed, height)
+    else:
+        return</code></pre>
+</details>
+</dd>
+<dt id="selenium_helper.SeleniumBrowser.recur_selenium_get"><code class="name flex">
+<span>def <span class="ident">recur_selenium_get</span></span>(<span>self, url: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Access web page recursively.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>url</code></strong></dt>
+<dd>web page url (str)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def recur_selenium_get(self, url: str) -&gt; None:
+    &#34;&#34;&#34;
+    Access web page recursively.
+    Args:
+        url: web page url (str)
+    Returns:
+        None
+    &#34;&#34;&#34;
+    try:
+        self.browser.get(url)
+    except TimeoutException as e:
+        logging.error(f&#34;Timeout Error to access {url}. Retry &#34;, e)
+        self.recur_selenium_get(url)</code></pre>
+</details>
 </dd>
 </dl>
- <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="NotCorrectValueException">class <strong>NotCorrectValueException</strong></a>(<a href="builtins.html#Exception">builtins.Exception</a>)</font></td></tr>
-    
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="selenium_helper.html#NotCorrectValueException">NotCorrectValueException</a></dd>
-<dd><a href="builtins.html#Exception">builtins.Exception</a></dd>
-<dd><a href="builtins.html#BaseException">builtins.BaseException</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dd>
 </dl>
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
-<dl><dt><a name="NotCorrectValueException-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
-
-<hr>
-Static methods inherited from <a href="builtins.html#Exception">builtins.Exception</a>:<br>
-<dl><dt><a name="NotCorrectValueException-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
-
-<hr>
-Methods inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
-<dl><dt><a name="NotCorrectValueException-__delattr__"><strong>__delattr__</strong></a>(self, name, /)</dt><dd><tt>Implement&nbsp;delattr(self,&nbsp;name).</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-__reduce__"><strong>__reduce__</strong></a>(...)</dt><dd><tt>Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-__setattr__"><strong>__setattr__</strong></a>(self, name, value, /)</dt><dd><tt>Implement&nbsp;setattr(self,&nbsp;name,&nbsp;value).</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="NotCorrectValueException-__str__"><strong>__str__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;str(self).</tt></dd></dl>
-
-<dl><dt><a name="NotCorrectValueException-with_traceback"><strong>with_traceback</strong></a>(...)</dt><dd><tt><a href="builtins.html#Exception">Exception</a>.<a href="#NotCorrectValueException-with_traceback">with_traceback</a>(tb)&nbsp;--<br>
-set&nbsp;self.<strong>__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="builtins.html#BaseException">builtins.BaseException</a>:<br>
-<dl><dt><strong>__cause__</strong></dt>
-<dd><tt>exception&nbsp;cause</tt></dd>
-</dl>
-<dl><dt><strong>__context__</strong></dt>
-<dd><tt>exception&nbsp;context</tt></dd>
-</dl>
-<dl><dt><strong>__dict__</strong></dt>
-</dl>
-<dl><dt><strong>__suppress_context__</strong></dt>
-</dl>
-<dl><dt><strong>__traceback__</strong></dt>
-</dl>
-<dl><dt><strong>args</strong></dt>
-</dl>
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="SeleniumBrowser">class <strong>SeleniumBrowser</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#SeleniumBrowser">SeleniumBrowser</a>(geckodriver_path:&nbsp;str,&nbsp;headless:&nbsp;bool&nbsp;=&nbsp;True,&nbsp;tor_access:&nbsp;bool&nbsp;=&nbsp;False,&nbsp;tor_browser:&nbsp;bool&nbsp;=&nbsp;False,&nbsp;tor_setting:&nbsp;dict&nbsp;=&nbsp;{'tor_browser':&nbsp;'',&nbsp;'tor_profile':&nbsp;''},&nbsp;addons:&nbsp;dict&nbsp;=&nbsp;{'dir':&nbsp;'',&nbsp;'apps':&nbsp;[]},&nbsp;proxy:&nbsp;dict&nbsp;=&nbsp;{'ip':&nbsp;'',&nbsp;'port':&nbsp;''},&nbsp;set_size:&nbsp;bool&nbsp;=&nbsp;False)&nbsp;-&amp;gt;&nbsp;None<br>
-&nbsp;<br>
-This&nbsp;is&nbsp;a&nbsp;module&nbsp;to&nbsp;support&nbsp;to&nbsp;use&nbsp;a&nbsp;selenium&nbsp;with&nbsp;several&nbsp;functions.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%">Methods defined here:<br>
-<dl><dt><a name="SeleniumBrowser-__init__"><strong>__init__</strong></a>(self, geckodriver_path: str, headless: bool = True, tor_access: bool = False, tor_browser: bool = False, tor_setting: dict = {'tor_browser': '', 'tor_profile': ''}, addons: dict = {'dir': '', 'apps': []}, proxy: dict = {'ip': '', 'port': ''}, set_size: bool = False) -&gt; None</dt><dd><tt>class&nbsp;function&nbsp;for&nbsp;selenium&nbsp;browser<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;geckodriver_path:&nbsp;geckodriver's&nbsp;path<br>
-&nbsp;&nbsp;&nbsp;&nbsp;headless:&nbsp;Use&nbsp;headless&nbsp;mode&nbsp;(bool),&nbsp;default&nbsp;=&nbsp;True<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tor_access:&nbsp;Use&nbsp;Tor&nbsp;(bool),&nbsp;default&nbsp;=&nbsp;False<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tor_browser:&nbsp;Use&nbsp;Tor&nbsp;browser&nbsp;(bool),&nbsp;default&nbsp;=&nbsp;False<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tor_setting:&nbsp;Tor&nbsp;browser&nbsp;setting&nbsp;(dict),&nbsp;default&nbsp;=&nbsp;{"tor_browser":&nbsp;"",&nbsp;"tor_profile":&nbsp;""}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;addons:&nbsp;Use&nbsp;installed&nbsp;addons&nbsp;(dict),&nbsp;default&nbsp;=&nbsp;{"dir":&nbsp;"",&nbsp;"apps":&nbsp;[]}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;proxy:&nbsp;Use&nbsp;proxy&nbsp;server&nbsp;(dict),&nbsp;default&nbsp;=&nbsp;{"ip":&nbsp;"",&nbsp;"port":&nbsp;""}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;set_size:&nbsp;set&nbsp;windows&nbsp;size&nbsp;as&nbsp;(900,&nbsp;500)&nbsp;(bool),&nbsp;default&nbsp;=&nbsp;false<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;browser:&nbsp;self.<strong>browser</strong></tt></dd></dl>
-
-<dl><dt><a name="SeleniumBrowser-check_gip"><strong>check_gip</strong></a>(self) -&gt; str</dt><dd><tt>get&nbsp;current&nbsp;global&nbsp;IP<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;gip:&nbsp;global&nbsp;IP&nbsp;(str)</tt></dd></dl>
-
-<dl><dt><a name="SeleniumBrowser-close_other_tabs"><strong>close_other_tabs</strong></a>(self) -&gt; None</dt><dd><tt>close&nbsp;other&nbsp;tabs<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
-
-<dl><dt><a name="SeleniumBrowser-close_selenium"><strong>close_selenium</strong></a>(self) -&gt; None</dt><dd><tt>close&nbsp;browser.<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
-
-<dl><dt><a name="SeleniumBrowser-recur_scroll_down"><strong>recur_scroll_down</strong></a>(self, speed: int, start_height: int = 1) -&gt; None</dt><dd><tt>Scroll&nbsp;down&nbsp;recursively&nbsp;until&nbsp;bottom&nbsp;of&nbsp;the&nbsp;page.<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;speed:&nbsp;it&nbsp;should&nbsp;be&nbsp;tuned,&nbsp;based&nbsp;on&nbsp;the&nbsp;bandwidth&nbsp;of&nbsp;the&nbsp;internet.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;start_height:&nbsp;start&nbsp;height&nbsp;value.&nbsp;it's&nbsp;1&nbsp;at&nbsp;the&nbsp;beginning.<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
-
-<dl><dt><a name="SeleniumBrowser-recur_selenium_get"><strong>recur_selenium_get</strong></a>(self, url: str) -&gt; None</dt><dd><tt>access&nbsp;web&nbsp;page&nbsp;recursively.<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;web&nbsp;page&nbsp;url&nbsp;(str)<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;None</tt></dd></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-</td></tr></table></td></tr></table>
-</body></html>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="selenium_helper.NotCorrectValueException" href="#selenium_helper.NotCorrectValueException">NotCorrectValueException</a></code></h4>
+</li>
+<li>
+<h4><code><a title="selenium_helper.SeleniumBrowser" href="#selenium_helper.SeleniumBrowser">SeleniumBrowser</a></code></h4>
+<ul class="">
+<li><code><a title="selenium_helper.SeleniumBrowser.check_gip" href="#selenium_helper.SeleniumBrowser.check_gip">check_gip</a></code></li>
+<li><code><a title="selenium_helper.SeleniumBrowser.close_other_tabs" href="#selenium_helper.SeleniumBrowser.close_other_tabs">close_other_tabs</a></code></li>
+<li><code><a title="selenium_helper.SeleniumBrowser.close_selenium" href="#selenium_helper.SeleniumBrowser.close_selenium">close_selenium</a></code></li>
+<li><code><a title="selenium_helper.SeleniumBrowser.recur_scroll_down" href="#selenium_helper.SeleniumBrowser.recur_scroll_down">recur_scroll_down</a></code></li>
+<li><code><a title="selenium_helper.SeleniumBrowser.recur_selenium_get" href="#selenium_helper.SeleniumBrowser.recur_selenium_get">recur_selenium_get</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
