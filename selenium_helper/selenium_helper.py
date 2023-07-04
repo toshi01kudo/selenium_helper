@@ -2,15 +2,10 @@
 import time
 import logging
 import gc
-import requests
-from requests.exceptions import RequestException, ConnectionError, HTTPError, Timeout
-import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.proxy import *
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.firefox import service as fs
 from selenium.common.exceptions import TimeoutException
 
@@ -32,19 +27,20 @@ class SeleniumBrowser:
         headless: bool = True,
         tor_access: bool = False,
         tor_browser: bool = False,
-        tor_setting: dict = {"tor_browser": "", "tor_profile": ""},
+        browser_setting: dict = {"browser_path": "", "browser_profile": ""},
         addons: dict = {"dir": "", "apps": []},
         proxy: dict = {"ip": "", "port": ""},
         set_size: bool = False,
     ) -> None:
         """
-        class function for selenium browser
+        Class function for selenium browser
         Args:
             geckodriver_path: geckodriver's path
+            browser_path: browser's path, such as, Firefox or Tor
             headless: Use headless mode (bool), default = True
             tor_access: Use Tor (bool), default = False
             tor_browser: Use Tor browser (bool), default = False
-            tor_setting: Tor browser setting (dict), default = {"tor_browser": "", "tor_profile": ""}
+            browser_setting: Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}
             addons: Use installed addons (dict), default = {"dir": "", "apps": []}
             proxy: Use proxy server (dict), default = {"ip": "", "port": ""}
             set_size: set windows size as (900, 500) (bool), default = false
@@ -56,7 +52,7 @@ class SeleniumBrowser:
         self.headless = headless
         self.tor_access = tor_access
         self.tor_browser = tor_browser
-        self.tor_setting = tor_setting
+        self.browser_setting = browser_setting
         self.addons = addons
         self.proxy = proxy
         self.set_size = set_size
@@ -68,6 +64,8 @@ class SeleniumBrowser:
         options = webdriver.FirefoxOptions()
         if headless:
             options.add_argument("--headless")
+        # Profile should be set with options from Selenium4
+        options.set_preference("profile", browser_setting["browser_profile"])
         # Use Service for executable_path from Selenium4
         firefox_service = fs.Service(executable_path=geckodriver_path)
 
@@ -81,17 +79,11 @@ class SeleniumBrowser:
             proxyHost = "127.0.0.1"
             proxyPort = 9150
 
-            binary = FirefoxBinary(tor_setting["tor_browser"])
-            fp = webdriver.FirefoxProfile(tor_setting["tor_profile"])
-            # fp.set_preference('extensions.torlauncher.start_tor',True)
-            fp.set_preference("network.proxy.type", 1)
-            fp.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
-            fp.set_preference("network.proxy.socks_port", proxyPort)
-            fp.set_preference("network.proxy.socks_remote_dns", False)
-            fp.update_preferences()
-
-            # get browser for selenium
-            self.browser = webdriver.Firefox(firefox_binary=binary, firefox_profile=fp, options=options)
+            options.binary_location = browser_setting["browser_path"]
+            options.set_preference("network.proxy.type", 1)
+            options.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
+            options.set_preference("network.proxy.socks_port", proxyPort)
+            options.set_preference("network.proxy.socks_remote_dns", False)
 
         elif tor_access:
             """
@@ -102,34 +94,28 @@ class SeleniumBrowser:
             """
             proxyHost = "127.0.0.1"
             proxyPort = 9150
-            fp = webdriver.FirefoxProfile()
-            fp.set_preference("network.proxy.type", 1)
-            fp.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
-            fp.set_preference("network.proxy.socks_port", proxyPort)
-            fp.update_preferences()
+            options.binary_location = browser_setting["browser_path"]
+            options.set_preference("network.proxy.type", 1)
+            options.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
+            options.set_preference("network.proxy.socks_port", proxyPort)
 
-            # get browser for selenium
-            self.browser = webdriver.Firefox(service=firefox_service, firefox_profile=fp, options=options)
-
-        elif len(proxy["ip"]) > 0 and len(proxy["port"]) > 0:
-            # proxy access with specified ip and port.
+        elif len(proxy["ip"]) > 0 and len(str(proxy["port"])) > 0:
+            # Proxy access with specified ip and port.
             proxyHost = proxy["ip"]
             proxyPort = proxy["port"]
-            fp = webdriver.FirefoxProfile()
-            fp.set_preference("network.proxy.type", 1)
-            fp.set_preference("network.proxy.http", proxyHost)
-            fp.set_preference("network.proxy.http_port", proxyPort)
-            fp.set_preference("network.proxy.ssl", proxyHost)  # SSL PROXY
-            fp.set_preference("network.proxy.ssl_port", proxyPort)
-            fp.update_preferences()
-
-            # get browser for selenium
-            self.browser = webdriver.Firefox(service=firefox_service, firefox_profile=fp, options=options)
+            options.binary_location = browser_setting["browser_path"]
+            options.set_preference("network.proxy.type", 1)
+            options.set_preference("network.proxy.http", proxyHost)
+            options.set_preference("network.proxy.http_port", proxyPort)
+            options.set_preference("network.proxy.ssl", proxyHost)  # SSL PROXY
+            options.set_preference("network.proxy.ssl_port", proxyPort)
 
         else:
             # Normal access with selenium.
             # get browser for selenium
-            self.browser = webdriver.Firefox(service=firefox_service, options=options)
+            options.binary_location = browser_setting["browser_path"]
+
+        self.browser = webdriver.Firefox(service=firefox_service, options=options)
 
         if len(addons["dir"]) > 0 and len(addons["apps"]) > 0:
             # Use addons
@@ -154,7 +140,7 @@ class SeleniumBrowser:
         del self.headless
         del self.tor_access
         del self.tor_browser
-        del self.tor_setting
+        del self.browser_setting
         del self.addons
         del self.proxy
         del self.set_size
@@ -163,7 +149,7 @@ class SeleniumBrowser:
 
     def close_other_tabs(self) -> None:
         """
-        close other tabs
+        Close other tabs
         Args:
             None
         Returns:
@@ -179,7 +165,7 @@ class SeleniumBrowser:
 
     def check_gip(self) -> str:
         """
-        get current global IP
+        Get current global IP
         Args:
             None
         Returns:
@@ -198,7 +184,7 @@ class SeleniumBrowser:
 
     def recur_selenium_get(self, url: str) -> None:
         """
-        access web page recursively.
+        Access web page recursively.
         Args:
             url: web page url (str)
         Returns:
@@ -235,7 +221,7 @@ class SeleniumBrowser:
 
     def close_selenium(self) -> None:
         """
-        close browser.
+        Close browser.
         Args:
             None
         Returns:
@@ -256,16 +242,14 @@ class SeleniumBrowser:
         Returns:
             init_check_result: True or False
         """
-        if len(self.geckodriver_path) == 0:
-            # geckodriver_path is mandatory.
-            init_ok = False
-        elif (
-            self.tor_browser
-            and (len(self.tor_setting["tor_browser"]) == 0 or len(self.tor_setting["tor_profile"])) == 0
+        if (
+            len(self.geckodriver_path) == 0
+            or len(self.browser_setting["browser_path"]) == 0
+            or len(self.browser_setting["browser_profile"]) == 0
         ):
-            # tor_setting is required for tor_browser.
+            # geckodriver_path and browser setting are mandatory.
             init_ok = False
-        elif (len(self.proxy["ip"]) == 0) ^ (len(self.proxy["port"]) == 0):
+        elif (len(self.proxy["ip"]) == 0) ^ (len(str(self.proxy["port"])) == 0):
             # proxy needs ip and port.
             init_ok = False
         elif (len(self.addons["dir"]) == 0) ^ (len(self.addons["apps"]) == 0):
