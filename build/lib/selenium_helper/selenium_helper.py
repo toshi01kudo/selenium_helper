@@ -173,9 +173,7 @@ class SeleniumBrowser:
         """
         try:
             self.browser.get("http://checkip.amazonaws.com")
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, "pre"))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
         except Exception:
             logging.info("Timeout to check IP")
             return ""
