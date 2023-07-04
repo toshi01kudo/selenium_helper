@@ -31,6 +31,8 @@ brsr = selenium_helper.SeleniumBrowser(geckodriver_path)
 * set_size: set windows size as (900, 500) (bool), default = false
 
 ## Functions
+* `pdoc3` automatically creates Github Pages, see: https://toshi01kudo.github.io/selenium_helper/ 
+
 * close_other_tabs: close other tabs.
 * check_gip: check current Global IP with AWS function.
 * recur_selenium_get: access web page recursively until a page can be loaded successfully.
