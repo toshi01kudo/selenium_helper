@@ -14,7 +14,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Update docs
-        run: pdoc --html -o docs --force ./selenium_helper/selenium_helper.py
+        run: |
+          pdoc --html -o docs --force ./selenium_helper/selenium_helper.py
+          mv --force docs/selenium_helper.html docs/index.html
       - name: Format by black
         run: |
           pip install black
