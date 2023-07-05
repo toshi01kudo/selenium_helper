@@ -17,15 +17,17 @@ Or, you can get this repogitory with `git clone`, like the usual git operation.
 ## How to use
 You need to specify several parameters.
 ```
-import selenium_helper
+from selenium_helper import SeleniumBrowser
 geckodriver_path = r'input geckodriver's path here.'
-brsr = selenium_helper.SeleniumBrowser(geckodriver_path)
+firefox_binary_path = r"input your firefox.exe's path"
+firefox_profile_path = r"input your firefox profiles's path"
+brsr = SeleniumBrowser(geckodriver_path = geckodriver_path, browser_setting = {"browser_path": firefox_binary_path, "browser_profile": firefox_profile_path})
 ```
 * geckodriver_path: You need to specify geckodriver path. (You need to install geckodriver before use this module.)
 * headless: Use headless mode (bool), default = True
 * tor_access: Use Tor (bool), default = False
 * tor_browser: Use Tor browser (bool), default = False
-* tor_setting: Tor browser setting (dict), default = {"tor_browser": "", "tor_profile": ""}
+* browser_setting: Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}
 * addons: Use installed addons (dict), default = {"dir": "", "apps": []}
 * proxy: Use proxy server (dict), default = {"ip": "", "port": ""}
 * set_size: set windows size as (900, 500) (bool), default = false
