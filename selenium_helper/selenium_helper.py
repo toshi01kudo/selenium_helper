@@ -29,7 +29,7 @@ class SeleniumBrowser:
         tor_browser: bool = False,
         browser_setting: dict = {"browser_path": "", "browser_profile": ""},
         addons: dict = {"dir": "", "apps": []},
-        proxy: dict = {"ip": "", "port": ""},
+        proxy: dict = {"ip": "", "port": 3128},
         set_size: bool = False,
     ) -> None:
         """
@@ -173,9 +173,7 @@ class SeleniumBrowser:
         """
         try:
             self.browser.get("http://checkip.amazonaws.com")
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, "pre"))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
         except Exception:
             logging.info("Timeout to check IP")
             return ""
