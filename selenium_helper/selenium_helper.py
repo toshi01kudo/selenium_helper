@@ -251,9 +251,6 @@ class SeleniumBrowser:
         ):
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
-        elif (len(self.proxy["ip"]) == 0) ^ (len(str(self.proxy["port"])) == 0):
-            # proxy needs ip and port.
-            init_ok = False
         elif (len(self.addons["dir"]) == 0) ^ (len(self.addons["apps"]) == 0):
             # addons needs ["apps"] and ["dir"].
             init_ok = False
