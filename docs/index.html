@@ -201,7 +201,9 @@ class SeleniumBrowser:
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+            )
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -511,7 +513,9 @@ class NotCorrectValueException(Exception):
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+            )
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -622,7 +626,9 @@ class NotCorrectValueException(Exception):
     &#34;&#34;&#34;
     try:
         self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-        WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
+        )
     except Exception:
         logging.info(&#34;Timeout to check IP&#34;)
         return &#34;&#34;
