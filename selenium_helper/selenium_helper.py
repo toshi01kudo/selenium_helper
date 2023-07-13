@@ -173,7 +173,9 @@ class SeleniumBrowser:
         """
         try:
             self.browser.get("http://checkip.amazonaws.com")
-            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "pre"))
+            )
         except Exception:
             logging.info("Timeout to check IP")
             return ""
@@ -242,7 +244,10 @@ class SeleniumBrowser:
         Returns:
             init_check_result: True or False
         """
-        if len(self.geckodriver_path) == 0 or len(self.browser_setting["browser_path"]) == 0:
+        if (
+            len(self.geckodriver_path) == 0
+            or len(self.browser_setting["browser_path"]) == 0
+        ):
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
         elif (len(self.addons["dir"]) == 0) ^ (len(self.addons["apps"]) == 0):

@@ -201,9 +201,7 @@ class SeleniumBrowser:
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -272,11 +270,7 @@ class SeleniumBrowser:
         Returns:
             init_check_result: True or False
         &#34;&#34;&#34;
-        if (
-            len(self.geckodriver_path) == 0
-            or len(self.browser_setting[&#34;browser_path&#34;]) == 0
-            or len(self.browser_setting[&#34;browser_profile&#34;]) == 0
-        ):
+        if len(self.geckodriver_path) == 0 or len(self.browser_setting[&#34;browser_path&#34;]) == 0:
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
         elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
@@ -513,9 +507,7 @@ class NotCorrectValueException(Exception):
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -584,11 +576,7 @@ class NotCorrectValueException(Exception):
         Returns:
             init_check_result: True or False
         &#34;&#34;&#34;
-        if (
-            len(self.geckodriver_path) == 0
-            or len(self.browser_setting[&#34;browser_path&#34;]) == 0
-            or len(self.browser_setting[&#34;browser_profile&#34;]) == 0
-        ):
+        if len(self.geckodriver_path) == 0 or len(self.browser_setting[&#34;browser_path&#34;]) == 0:
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
         elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
@@ -626,9 +614,7 @@ class NotCorrectValueException(Exception):
     &#34;&#34;&#34;
     try:
         self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-        )
+        WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
     except Exception:
         logging.info(&#34;Timeout to check IP&#34;)
         return &#34;&#34;
