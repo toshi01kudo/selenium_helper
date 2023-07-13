@@ -57,7 +57,7 @@ class SeleniumBrowser:
         tor_browser: bool = False,
         browser_setting: dict = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;},
         addons: dict = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []},
-        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;},
+        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: 3128},
         set_size: bool = False,
     ) -&gt; None:
         &#34;&#34;&#34;
@@ -201,9 +201,7 @@ class SeleniumBrowser:
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -279,9 +277,6 @@ class SeleniumBrowser:
         ):
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
-        elif (len(self.proxy[&#34;ip&#34;]) == 0) ^ (len(str(self.proxy[&#34;port&#34;])) == 0):
-            # proxy needs ip and port.
-            init_ok = False
         elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
             # addons needs [&#34;apps&#34;] and [&#34;dir&#34;].
             init_ok = False
@@ -324,7 +319,7 @@ class NotCorrectValueException(Exception):
 </dd>
 <dt id="selenium_helper.SeleniumBrowser"><code class="flex name class">
 <span>class <span class="ident">SeleniumBrowser</span></span>
-<span>(</span><span>geckodriver_path: str, headless: bool = True, tor_access: bool = False, tor_browser: bool = False, browser_setting: dict = {'browser_path': '', 'browser_profile': ''}, addons: dict = {'dir': '', 'apps': []}, proxy: dict = {'ip': '', 'port': ''}, set_size: bool = False)</span>
+<span>(</span><span>geckodriver_path: str, headless: bool = True, tor_access: bool = False, tor_browser: bool = False, browser_setting: dict = {'browser_path': '', 'browser_profile': ''}, addons: dict = {'dir': '', 'apps': []}, proxy: dict = {'ip': '', 'port': 3128}, set_size: bool = False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This is a module to support to use a selenium with several functions.</p>
@@ -372,7 +367,7 @@ class NotCorrectValueException(Exception):
         tor_browser: bool = False,
         browser_setting: dict = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;},
         addons: dict = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []},
-        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;},
+        proxy: dict = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: 3128},
         set_size: bool = False,
     ) -&gt; None:
         &#34;&#34;&#34;
@@ -516,9 +511,7 @@ class NotCorrectValueException(Exception):
         &#34;&#34;&#34;
         try:
             self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-            )
+            WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
         except Exception:
             logging.info(&#34;Timeout to check IP&#34;)
             return &#34;&#34;
@@ -594,9 +587,6 @@ class NotCorrectValueException(Exception):
         ):
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
-        elif (len(self.proxy[&#34;ip&#34;]) == 0) ^ (len(str(self.proxy[&#34;port&#34;])) == 0):
-            # proxy needs ip and port.
-            init_ok = False
         elif (len(self.addons[&#34;dir&#34;]) == 0) ^ (len(self.addons[&#34;apps&#34;]) == 0):
             # addons needs [&#34;apps&#34;] and [&#34;dir&#34;].
             init_ok = False
@@ -632,9 +622,7 @@ class NotCorrectValueException(Exception):
     &#34;&#34;&#34;
     try:
         self.browser.get(&#34;http://checkip.amazonaws.com&#34;)
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;))
-        )
+        WebDriverWait(self.browser, 10).until(EC.presence_of_element_located((By.TAG_NAME, &#34;pre&#34;)))
     except Exception:
         logging.info(&#34;Timeout to check IP&#34;)
         return &#34;&#34;
