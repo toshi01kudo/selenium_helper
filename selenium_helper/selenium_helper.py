@@ -271,7 +271,6 @@ class SeleniumBrowser:
         if (
             len(self.geckodriver_path) == 0
             or len(self.browser_setting["browser_path"]) == 0
-            or len(self.browser_setting["browser_profile"]) == 0
         ):
             # geckodriver_path and browser setting are mandatory.
             init_ok = False
