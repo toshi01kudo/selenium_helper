@@ -60,8 +60,6 @@ class SeleniumBrowser:
         self.addons = addons
         self.proxy = proxy
         self.set_size = set_size
-        self.private_mode = private_mode
-        self.session_cookies_only = session_cookies_only
         # initial check
         init_ok = self._init_check()
         if not init_ok:
@@ -156,8 +154,6 @@ class SeleniumBrowser:
         del self.addons
         del self.proxy
         del self.set_size
-        del self.private_mode
-        del self.session_cookies_only
 
     # Class Public Fuctions -------
 
