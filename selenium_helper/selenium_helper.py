@@ -31,6 +31,8 @@ class SeleniumBrowser:
         addons: dict = {"dir": "", "apps": []},
         proxy: dict = {"ip": "", "port": 3128},
         set_size: bool = False,
+        private_mode: bool = False,
+        session_cookies_only: bool = False,
     ) -> None:
         """
         Class function for selenium browser
@@ -44,6 +46,8 @@ class SeleniumBrowser:
             addons: Use installed addons (dict), default = {"dir": "", "apps": []}
             proxy: Use proxy server (dict), default = {"ip": "", "port": ""}
             set_size: set windows size as (900, 500) (bool), default = false
+            private_mode: start browser in private browsing so nothing is persisted to disk (bool), default = False
+            session_cookies_only: discard all cookies when the browser closes (bool), default = False
         Returns:
             browser: self.browser
         """
@@ -56,6 +60,8 @@ class SeleniumBrowser:
         self.addons = addons
         self.proxy = proxy
         self.set_size = set_size
+        self.private_mode = private_mode
+        self.session_cookies_only = session_cookies_only
         # initial check
         init_ok = self._init_check()
         if not init_ok:
@@ -64,6 +70,12 @@ class SeleniumBrowser:
         options = webdriver.FirefoxOptions()
         if headless:
             options.add_argument("--headless")
+        if private_mode:
+            # Method 3: private browsing, nothing (incl. cookies) is written to disk.
+            options.set_preference("browser.privatebrowsing.autostart", True)
+        if session_cookies_only:
+            # Method 2: keep cookies for the session only, discard them on browser close.
+            options.set_preference("network.cookie.lifetimePolicy", 2)
         # Profile should be set with options from Selenium4
         options.set_preference("profile", browser_setting["browser_profile"])
         # Use Service for executable_path from Selenium4
@@ -144,8 +156,20 @@ class SeleniumBrowser:
         del self.addons
         del self.proxy
         del self.set_size
+        del self.private_mode
+        del self.session_cookies_only
 
     # Class Public Fuctions -------
+
+    def delete_all_cookies(self) -> None:
+        """
+        Delete all cookies in the current browser session (Method 1).
+        Args:
+            None
+        Returns:
+            None
+        """
+        self.browser.delete_all_cookies()
 
     def close_other_tabs(self) -> None:
         """
