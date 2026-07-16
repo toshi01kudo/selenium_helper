@@ -99,7 +99,11 @@ el.replaceWith(d);
             browser_path: browser&#39;s path, such as, Firefox or Tor
             headless: Use headless mode (bool), default = True
             tor_access: Use Tor (bool), default = False
+                When True, DNS is resolved through the SOCKS5 proxy
+                (network.proxy.socks_remote_dns=True) and WebRTC is disabled
+                (media.peerconnection.enabled=False) to prevent DNS and IP leaks.
             tor_browser: Use Tor browser (bool), default = False
+                The same DNS/WebRTC leak protections as tor_access are applied.
             browser_setting: Browser setting (dict), default = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;}
             addons: Use installed addons (dict), default = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []}
             proxy: Use proxy server (dict), default = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;}
@@ -151,7 +155,10 @@ el.replaceWith(d);
             options.set_preference(&#34;network.proxy.type&#34;, 1)
             options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
             options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
-            options.set_preference(&#34;network.proxy.socks_remote_dns&#34;, False)
+            # Resolve DNS through the SOCKS5 proxy (Tor) to avoid DNS leaks.
+            options.set_preference(&#34;network.proxy.socks_remote_dns&#34;, True)
+            # Disable WebRTC to avoid real IP leaks via STUN bypassing the proxy.
+            options.set_preference(&#34;media.peerconnection.enabled&#34;, False)
 
         elif tor_access:
             &#34;&#34;&#34;
@@ -166,6 +173,10 @@ el.replaceWith(d);
             options.set_preference(&#34;network.proxy.type&#34;, 1)
             options.set_preference(&#34;network.proxy.socks&#34;, proxyHost)  # SOCKS PROXY
             options.set_preference(&#34;network.proxy.socks_port&#34;, proxyPort)
+            # Resolve DNS through the SOCKS5 proxy (Tor) to avoid DNS leaks.
+            options.set_preference(&#34;network.proxy.socks_remote_dns&#34;, True)
+            # Disable WebRTC to avoid real IP leaks via STUN bypassing the proxy.
+            options.set_preference(&#34;media.peerconnection.enabled&#34;, False)
 
         elif len(proxy[&#34;ip&#34;]) &gt; 0 and len(str(proxy[&#34;port&#34;])) &gt; 0:
             # Proxy access with specified ip and port.
@@ -346,9 +357,13 @@ el.replaceWith(d);
 <dt><strong><code>headless</code></strong></dt>
 <dd>Use headless mode (bool), default = True</dd>
 <dt><strong><code>tor_access</code></strong></dt>
-<dd>Use Tor (bool), default = False</dd>
+<dd>Use Tor (bool), default = False
+When True, DNS is resolved through the SOCKS5 proxy
+(network.proxy.socks_remote_dns=True) and WebRTC is disabled
+(media.peerconnection.enabled=False) to prevent DNS and IP leaks.</dd>
 <dt><strong><code>tor_browser</code></strong></dt>
-<dd>Use Tor browser (bool), default = False</dd>
+<dd>Use Tor browser (bool), default = False
+The same DNS/WebRTC leak protections as tor_access are applied.</dd>
 <dt><strong><code>browser_setting</code></strong></dt>
 <dd>Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}</dd>
 <dt><strong><code>addons</code></strong></dt>
