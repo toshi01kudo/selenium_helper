@@ -26,7 +26,9 @@ brsr = SeleniumBrowser(geckodriver_path = geckodriver_path, browser_setting = {"
 * geckodriver_path: You need to specify geckodriver path. (You need to install geckodriver before use this module.)
 * headless: Use headless mode (bool), default = True
 * tor_access: Use Tor (bool), default = False
+  * When enabled, DNS is resolved through the SOCKS5 proxy (`network.proxy.socks_remote_dns=True`) and WebRTC is disabled (`media.peerconnection.enabled=False`) to prevent DNS and IP (WebRTC) leaks.
 * tor_browser: Use Tor browser (bool), default = False
+  * The same DNS/WebRTC leak protections as `tor_access` are applied.
 * browser_setting: Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}
 * addons: Use installed addons (dict), default = {"dir": "", "apps": []}
 * proxy: Use proxy server (dict), default = {"ip": "", "port": ""}

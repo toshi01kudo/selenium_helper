@@ -41,7 +41,11 @@ class SeleniumBrowser:
             browser_path: browser's path, such as, Firefox or Tor
             headless: Use headless mode (bool), default = True
             tor_access: Use Tor (bool), default = False
+                When True, DNS is resolved through the SOCKS5 proxy
+                (network.proxy.socks_remote_dns=True) and WebRTC is disabled
+                (media.peerconnection.enabled=False) to prevent DNS and IP leaks.
             tor_browser: Use Tor browser (bool), default = False
+                The same DNS/WebRTC leak protections as tor_access are applied.
             browser_setting: Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}
             addons: Use installed addons (dict), default = {"dir": "", "apps": []}
             proxy: Use proxy server (dict), default = {"ip": "", "port": ""}
@@ -93,7 +97,10 @@ class SeleniumBrowser:
             options.set_preference("network.proxy.type", 1)
             options.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
             options.set_preference("network.proxy.socks_port", proxyPort)
-            options.set_preference("network.proxy.socks_remote_dns", False)
+            # Resolve DNS through the SOCKS5 proxy (Tor) to avoid DNS leaks.
+            options.set_preference("network.proxy.socks_remote_dns", True)
+            # Disable WebRTC to avoid real IP leaks via STUN bypassing the proxy.
+            options.set_preference("media.peerconnection.enabled", False)
 
         elif tor_access:
             """
@@ -108,6 +115,10 @@ class SeleniumBrowser:
             options.set_preference("network.proxy.type", 1)
             options.set_preference("network.proxy.socks", proxyHost)  # SOCKS PROXY
             options.set_preference("network.proxy.socks_port", proxyPort)
+            # Resolve DNS through the SOCKS5 proxy (Tor) to avoid DNS leaks.
+            options.set_preference("network.proxy.socks_remote_dns", True)
+            # Disable WebRTC to avoid real IP leaks via STUN bypassing the proxy.
+            options.set_preference("media.peerconnection.enabled", False)
 
         elif len(proxy["ip"]) > 0 and len(str(proxy["port"])) > 0:
             # Proxy access with specified ip and port.
