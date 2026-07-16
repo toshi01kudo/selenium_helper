@@ -28,7 +28,7 @@ brsr = SeleniumBrowser(geckodriver_path = geckodriver_path, browser_setting = {"
 * tor_access: Use Tor (bool), default = False
   * When enabled, DNS is resolved through the SOCKS5 proxy (`network.proxy.socks_remote_dns=True`) and WebRTC is disabled (`media.peerconnection.enabled=False`) to prevent DNS and IP (WebRTC) leaks.
 * tor_browser: Use Tor browser (bool), default = False
-  * The same DNS/WebRTC leak protections as `tor_access` are applied.
+  * Only effective together with `tor_access=True`. The DNS/WebRTC leak protections above are applied whenever `tor_access=True` (with or without `tor_browser`); `tor_browser` alone has no effect.
 * browser_setting: Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}
 * addons: Use installed addons (dict), default = {"dir": "", "apps": []}
 * proxy: Use proxy server (dict), default = {"ip": "", "port": ""}

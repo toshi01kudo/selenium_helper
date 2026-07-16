@@ -103,7 +103,9 @@ el.replaceWith(d);
                 (network.proxy.socks_remote_dns=True) and WebRTC is disabled
                 (media.peerconnection.enabled=False) to prevent DNS and IP leaks.
             tor_browser: Use Tor browser (bool), default = False
-                The same DNS/WebRTC leak protections as tor_access are applied.
+                Only effective together with tor_access=True. The DNS/WebRTC
+                leak protections above are applied whenever tor_access=True
+                (with or without tor_browser); tor_browser alone has no effect.
             browser_setting: Browser setting (dict), default = {&#34;browser_path&#34;: &#34;&#34;, &#34;browser_profile&#34;: &#34;&#34;}
             addons: Use installed addons (dict), default = {&#34;dir&#34;: &#34;&#34;, &#34;apps&#34;: []}
             proxy: Use proxy server (dict), default = {&#34;ip&#34;: &#34;&#34;, &#34;port&#34;: &#34;&#34;}
@@ -363,7 +365,9 @@ When True, DNS is resolved through the SOCKS5 proxy
 (media.peerconnection.enabled=False) to prevent DNS and IP leaks.</dd>
 <dt><strong><code>tor_browser</code></strong></dt>
 <dd>Use Tor browser (bool), default = False
-The same DNS/WebRTC leak protections as tor_access are applied.</dd>
+Only effective together with tor_access=True. The DNS/WebRTC leak protections
+above are applied whenever tor_access=True (with or without tor_browser);
+tor_browser alone has no effect.</dd>
 <dt><strong><code>browser_setting</code></strong></dt>
 <dd>Browser setting (dict), default = {"browser_path": "", "browser_profile": ""}</dd>
 <dt><strong><code>addons</code></strong></dt>
